@@ -86,7 +86,9 @@ async function pullOnce() {
         await drawBlobToCanvas(blob);
         lastETag = newETag || null;
 
-        logger.addLine(`Кадр обновлён, size: ${(blob.size / 1024).toFixed(1)} KB`);
+        logger.addLine(
+            `Кадр ${canvas.width}×${canvas.height}, ${(blob.size / 1024).toFixed(1)} KB`
+        );
     } catch (err) {
         if (err.name === 'AbortError') {
             // сработал наш предохранительный таймаут — просто повторяем

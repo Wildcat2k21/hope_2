@@ -14,6 +14,10 @@ export const QUALITY = Number(CONFIG.QUALITY) || 0.8;
 export const QUALITY_WIDTH = Number(CONFIG.QUALITY_WIDTH) || 1280;
 export const QUALITY_HEIGHT = Number(CONFIG.QUALITY_HEIGHT) || 960;
 
+// Режим захвата: 'auto' — фото-режим макс. разрешения с фоллбэком, 'off' — только видео-кадр
+export const PHOTO_MODE = (CONFIG.PHOTO_MODE || 'auto').toLowerCase() !== 'off';
+export const UPLOAD_TIMEOUT = Number(CONFIG.UPLOAD_TIMEOUT) || 20000;
+
 // fetch с предохранительным таймаутом через AbortController
 export function fetchWithTimeout(url, options = {}, timeout = 5000) {
     const controller = new AbortController();

@@ -6,6 +6,8 @@ import {
     QUALITY,
     QUALITY_WIDTH,
     QUALITY_HEIGHT,
+    PHOTO_MODE,
+    UPLOAD_TIMEOUT,
     fetchWithTimeout
 } from './config.js';
 
@@ -112,16 +114,14 @@ async function screenshotLoop() {
     try {
         const roomId = localStorage.getItem('roomId');
         
-        const blob = await camera.makeScreenshot({
-            quality: QUALITY,
-            width: QUALITY_WIDTH,
-            height: QUALITY_HEIGHT,
-        });
-
         if (!roomId) {
             logger.addLine('Комната не создана');
             return;
         }
+
+        const { blob, width, height, mode } = await camera.capture({
+            quality: QUALITY,
+        });
 
         const form = new FormData();
         form.append('file', blob, 'screenshot.jpg');
@@ -133,12 +133,12 @@ async function screenshotLoop() {
                 method: 'POST',
                 body: form
             },
-            4000 // ⬅️ 4 сек, под мобильную сеть
+            UPLOAD_TIMEOUT
         );
 
         const json = await res.json();
         logger.addLine(
-            `Скрин сохранён: ${json.id}, ${(blob.size / 1024).toFixed(1)} KB`
+            `${mode === 'photo' ? '📷' : '🎞'} ${width}×${height}, ${(blob.size / 1024).toFixed(1)} KB → ${json.id}`
         );
     } catch (err) {
         if (err.name === 'AbortError') {
@@ -165,9 +165,25 @@ btn.addEventListener('click', async ({ target }) => {
     if(screenshotsIsStopped) {
         target.textContent = "Продолжить";
         disableWakeLock();              // ⬅️ ВАЖНО
+        camera.close();                 // отпускаем камеру
     }
     // Продолжение скриншотов
     else{
+        target.disabled = true;
+        try {
+            // Открываем камеру один раз и держим тёплой (нужно для takePhoto)
+            await camera.open({
+                width: QUALITY_WIDTH,
+                height: QUALITY_HEIGHT,
+                photo: PHOTO_MODE,
+            });
+        } catch (e) {
+            logger.addLine(`Не удалось открыть камеру: ${e.name}`);
+            screenshotsIsStopped = true;
+            target.disabled = false;
+            return;
+        }
+        target.disabled = false;
         target.textContent = "Остановить";
 
         // Не спамить комнатами
