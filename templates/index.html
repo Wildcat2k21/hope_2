@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hope</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="${PROTOCOL}://${SERVER_ADDR}:${SERVER_PORT}/styles/main.css">
+    <link rel="stylesheet" href="${PROTOCOL}://${SERVER_ADDR}:${SERVER_PORT}/styles/record.css">
+</head>
+<body class="body">
+    <div class="app">
+        
+        <div class="record">
+            <div class="record__demo">
+                <canvas width="${QUALITY_WIDTH}" height="${QUALITY_HEIGHT}" class="canvas record__image" id="rec-show"></canvas>
+            </div>
+            <div class="record__control">
+                <select class="record__dev-sel" name="rec-dev" id="rec-dev-select">
+                    <option value="">Выберите устройство записи</option>
+                </select>
+                <input autocomplete="off" class="record__link" id="share-link" type="text" readonly>
+                <button autocomplete="off" disabled="disabled" class="record__share" id="rec-share" >поделиться</button>
+                <textarea spellcheck="false" class="record__logs" id="txt-logs"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        window.__CONFIG__ = {
+
+            // server
+            SERVER_ADDR: "${SERVER_ADDR}",
+            SERVER_HOST: "${SERVER_ADDR}:${SERVER_PORT}",
+            API_PREFIX: "${API_PREFIX}",
+            PROTOCOL: "${PROTOCOL}",
+
+            // screenshot
+            INTERVAL: "${INTERVAL}",
+            QUALITY:"${QUALITY}",
+            QUALITY_WIDTH: "${QUALITY_WIDTH}",
+            QUALITY_HEIGHT: "${QUALITY_HEIGHT}",
+        }
+    </script>
+    <script src="${PROTOCOL}://${SERVER_ADDR}:${SERVER_PORT}/src/record.js" type="module"></script>
+</body>
+</html>

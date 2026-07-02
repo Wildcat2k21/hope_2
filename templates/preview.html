@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hope</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="${PROTOCOL}://${SERVER_ADDR}:${SERVER_PORT}/styles/main.css">
+    <link rel="stylesheet" href="${PROTOCOL}://${SERVER_ADDR}:${SERVER_PORT}/styles/preview.css">
+</head>
+<body class="body">
+    <div class="app">
+        
+        <div class="preview">
+            <div class="preview__image">
+                <canvas width="${QUALITY_WIDTH}" height="${QUALITY_HEIGHT}" class="canvas" id="img-show"></canvas>
+            </div>
+            <div class="preview__side">
+                <button autocomplete="off" class="preview__capture" id="capture-btn">Захват</button>
+                <ul class="snap-list" id="snap-list"></ul>
+            </div>
+            <div class="preview__logger-wrapper">
+                <textarea spellcheck="false" class="record__logs" id="txt-logs"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        window.__CONFIG__ = {
+
+            // server
+            SERVER_ADDR: "${SERVER_ADDR}",
+            SERVER_HOST: "${SERVER_ADDR}:${SERVER_PORT}",
+            API_PREFIX: "${API_PREFIX}",
+            PROTOCOL: "${PROTOCOL}",
+
+            // screenshot
+            INTERVAL: "${INTERVAL}",
+            QUALITY:"${QUALITY}",
+            QUALITY_WIDTH: "${QUALITY_WIDTH}",
+            QUALITY_HEIGHT: "${QUALITY_HEIGHT}",
+        }
+    </script>
+    <script src="${PROTOCOL}://${SERVER_ADDR}:${SERVER_PORT}/src/preview.js" type="module"></script>
+</body>
+</html>

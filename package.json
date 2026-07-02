@@ -1,0 +1,27 @@
+{
+  "name": "hope",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serv-dev:watch": "nodemon index.js",
+    "serv-start": "node index.js",
+    "build": "sh genpublic.sh",
+    "watch": "chokidar \"index.template.html\" \".env\" -c \"sh genpublic.sh\"",
+    "dev:watch": "npm run build && npm run watch"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "multer": "^2.0.2",
+    "nanoid": "^5.1.6"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "nodemon": "^3.1.11"
+  }
+}

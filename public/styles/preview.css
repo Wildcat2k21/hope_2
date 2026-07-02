@@ -1,0 +1,58 @@
+.preview__image {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.156);
+}
+
+.canvas {
+    max-height: 100vh;
+    max-width: 100vw;
+    background-color: rgba(0, 0, 0, 0.156);
+}
+
+.record__logs {
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+/* Панель захвата — фиксирована слева сверху, над картинкой */
+.preview__side {
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 1vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    max-height: 100vh;
+    box-sizing: border-box;
+}
+
+.preview__capture {
+    width: 22vh;
+    height: 6vh;
+    font-size: 2.2vh;
+    cursor: pointer;
+}
+
+.snap-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.snap-list .snap-item {
+    margin: 0.4vh 0;
+}
+
+.snap-list a {
+    display: inline-block;
+    padding: 0.4vh 0.8vh;
+    font-size: 1.9vh;
+    color: #0a58ca;
+    text-decoration: underline;
+    background: rgba(255, 255, 255, 0.75);
+}

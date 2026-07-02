@@ -1,0 +1,20 @@
+.record__demo {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.156);
+}
+
+.canvas {
+    max-height: 50vh;
+    background-color: rgba(0, 0, 0, 0.156);
+}
+
+.record__control {
+    width: 100vw;
+    height: 50vh;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
